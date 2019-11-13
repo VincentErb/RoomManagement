@@ -20,4 +20,22 @@
 		<filter-name>TemperatureWS</filter-name>
 		<url-pattern>/temperature/*</url-pattern>
 	</filter-mapping>
+	
+	<!--  Servlet for the jsp dashboard -->
+	<filter>
+		<filter-name>dashboard</filter-name>
+		<filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>WebInterface.WebConfig</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.servlet.filter.contextPath</param-name>
+			<param-value>/dashboard</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>dashboard</filter-name>
+		<url-pattern>/dashboard/*</url-pattern>
+	</filter-mapping>
 </web-app>
