@@ -3,19 +3,25 @@ package TemperatureWS;
 import java.util.ArrayList;
 import java.lang.reflect.Type;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+
 
 
 
@@ -176,6 +182,19 @@ public class Temperature {
 			String temp = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
 
 	return temp; 	
+	}
+	
+	@POST
+	@Path("setTempe/{roomId}/{id}/{tempe}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void setTempe (@PathParam("roomId") Integer roomId, @PathParam("id") Integer id, @PathParam("tempe") Float tempe){
+		/*ContentInstance cin = new ContentInstance();
+		cin.setContent(String.valueOf(tempe));
+		System.out.println(cin);
+		Client client = ClientBuilder.newClient();
+		Response resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
+				.path("TEMP_" + id + "/DATA/la")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").post(Entity.entity(Serializer.toXML(cin), "application/xml;ty=4"));*/
 	}
 
 }
