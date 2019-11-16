@@ -29,13 +29,25 @@ public class Temperature {
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getTempe() {
+	public ArrayList<ArrayList<String>> getTempe() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = getlistURL();
-		ArrayList<String> TempeAll = new ArrayList<String>();
+		ArrayList<ArrayList<String>> TempeAll = new ArrayList<ArrayList<String>>();
 
 		for (int n = 0; n < UrlList.size(); n++) {
+			ArrayList<String> Triplet = new ArrayList<String>();
+			Triplet.add(UrlList.get(n));
+			
+			String infoStr = client.target("http://127.0.0.1:8080/~")
+					.path(UrlList.get(n))
+					.request(MediaType.APPLICATION_JSON)
+					.header("X-M2M-Origin", "admin:admin")
+					.get(String.class);
+			JsonObject jsonObject1 = JsonParser.parseString(infoStr).getAsJsonObject();
+			String lbl = jsonObject1.get("m2m:ae").getAsJsonObject().get("lbl").getAsJsonArray().get(2).getAsString();
+			Triplet.add(lbl);
+			
 			String jsonStr = client.target("http://127.0.0.1:8080/~")
 					.path(UrlList.get(n))
 					.path("/DATA/la")
@@ -45,13 +57,10 @@ public class Temperature {
 
 			JsonObject jsonObject = JsonParser.parseString(jsonStr).getAsJsonObject();
 			String tempe = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
-			TempeAll.add(0, tempe);
+			Triplet.add(tempe);
+			TempeAll.add(Triplet);
 		}
 		return TempeAll;
-
-		// avec ol ou la (la = last ?)
-		// Verifier si le status de la requète est ok (=200)
-
 	}
 
 	@Path("out")
