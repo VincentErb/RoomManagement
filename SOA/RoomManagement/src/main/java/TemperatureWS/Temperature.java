@@ -5,6 +5,7 @@ import java.lang.reflect.Type;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -16,6 +17,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+
+
 /**
  * Root resource (exposed at "resource" path)
  */
@@ -26,7 +29,7 @@ public class Temperature {
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getTemperature() {
+	public ArrayList<String> getState() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = getlistURL();
@@ -147,6 +150,23 @@ public class Temperature {
 		}
 
 		return UrlList;
+	}
+	
+	@GET
+	@Path("{roomId}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getTempe(@PathParam("roomId") Integer roomId, @PathParam("id") Integer id) {
+		
+		Client client = ClientBuilder.newClient();
+		String resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
+				.path("TEMP_" + id + "/DATA/la")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").get(String.class);
+
+		
+			JsonObject jsonObject = JsonParser.parseString(resp).getAsJsonObject();
+			String temp = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
+
+	return temp; 	
 	}
 
 }
