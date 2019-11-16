@@ -29,7 +29,7 @@ public class Temperature {
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getState() {
+	public ArrayList<String> getTempe() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = getlistURL();
