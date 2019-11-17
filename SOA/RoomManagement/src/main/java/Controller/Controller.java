@@ -4,12 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.lang.Float;
 
 
 
 import TemperatureWS.Temperature;
 
+/**
+ * Root resource (exposed at "resource" path)
+ */
+@Path("")
 public class Controller {
 	public void manageRooms(){
 		// Get the temperature of all room in a list of triplets [url, room label, value]
@@ -46,6 +61,16 @@ public class Controller {
 	private void closeWindow(String string) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Path("all")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public static ArrayList<ArrayList<String>> getAllInfo() {
+		ArrayList<ArrayList<String>> TempeAll = new ArrayList<ArrayList<String>>();
+		TempeAll = TemperatureWS.Temperature.getTempe();
+		
+		return TempeAll;
 	}
 	
 }
