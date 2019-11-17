@@ -38,4 +38,24 @@
 		<filter-name>dashboard</filter-name>
 		<url-pattern>/dashboard/*</url-pattern>
 	</filter-mapping>
-</web-app>
+
+<!--  Servlet for the windows web service -->
+	<filter>
+		<filter-name>WindowsWS</filter-name>
+		<filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>WindowsWS</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.servlet.filter.contextPath</param-name>
+			<param-value>/windows</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>WindowsWS</filter-name>
+		<url-pattern>/windows/*</url-pattern>
+	</filter-mapping>
+	
+	</web-app>
+	
