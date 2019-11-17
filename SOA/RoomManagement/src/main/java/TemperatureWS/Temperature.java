@@ -35,7 +35,7 @@ public class Temperature {
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ArrayList<String>> getTempe() {
+	public static ArrayList<ArrayList<String>> getTempe() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = getlistURL();
@@ -72,7 +72,7 @@ public class Temperature {
 	@Path("out")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getOutsideTemperature() {
+	public static float getOutsideTemperature() {
 		Client client = ClientBuilder.newClient();
 		String jsonStr = client
 				.target("http://api.openweathermap.org/data/2.5/weather?q=Toulouse&APPID=a4f7422d0e286eb0e0d5575ce0b2c8c8")
@@ -84,15 +84,15 @@ public class Temperature {
 
 		// Conversion en degres
 		tempe = (float) (tempe - 273.15);
-		String result = String.valueOf(tempe);
+		//String result = String.valueOf(tempe);
 
-		return result;
+		return tempe;
 	}
 
 	@Path("UrlList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getlistURL() {
+	public static ArrayList<String> getlistURL() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> RoomList = getUrlRoom();
@@ -124,7 +124,7 @@ public class Temperature {
 	@Path("RoomList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getlistRoom() {
+	public static ArrayList<String> getlistRoom() {
 		Client client = ClientBuilder.newClient();
 		String jsonStr = client.target("http://127.0.0.1:8080/~/in-cse?fu=1&ty=16")
 				.request(MediaType.APPLICATION_JSON)
@@ -143,7 +143,7 @@ public class Temperature {
 	@Path("RoomUrl")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getUrlRoom() {
+	public static ArrayList<String> getUrlRoom() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = new ArrayList<String>();

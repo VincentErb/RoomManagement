@@ -196,7 +196,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Number of rooms (GEI)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                      <div id="nbRooms" class="h5 mb-0 font-weight-bold text-gray-800">-</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -268,23 +268,23 @@
 	                  <div class="col-xl-6 col-lg-4">
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 1</div>
 	                  	<ul>
-	                  		<li class="h5 mb-4">Temperature : </li>
-	                  		<li class="h5 mb-1">Window 1 : </li>
-	                  		<li class="h5 mb-4">Window 2 : </li>
-	                  		<li class="h5 mb-1">Lamp 1 : </li>
-	                  		<li class="h5 mb-1">Lamp 2 : </li>
-	                  		<li class="h5 mb-1">Lamp 3 : </li>
+	                  		<li class="h5 mb-4">Temperature : <a id="temp1">-</a></li>
+	                  		<li class="h5 mb-1">Window 1 : <a>-</a></li>
+	                  		<li class="h5 mb-4">Window 2 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamp 1 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamp 2 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamp 3 : <a>-</a></li>
 	                  	</ul>
 	                  </div>
 	                  <div class="col-xl-6 col-lg-4">
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 2</div>
 	                  	<ul>
-	                  		<li class="h5 mb-4">Temperature : </li>
-	                  		<li class="h5 mb-1">Window 1 : </li>
-	                  		<li class="h5 mb-4">Window 2 : </li>
-	                  		<li class="h5 mb-1">Lamp 1 : </li>
-	                  		<li class="h5 mb-1">Lamp 2 : </li>
-	                  		<li class="h5 mb-1">Lamp 3 : </li>
+	                  		<li class="h5 mb-4">Temperature : <a id="temp2">-</a></li>
+	                  		<li class="h5 mb-1">Window 1 : <a>-</a></li>
+	                  		<li class="h5 mb-4">Window 2 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamp 1 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamp 2 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamp 3 : <a>-</a></li>
 	                  	</ul>
 	                  </div>
 	                </div>

@@ -21,6 +21,24 @@
 		<url-pattern>/temperature/*</url-pattern>
 	</filter-mapping>
 	
+	<!--  Servlet for the controller web service -->
+	<filter>
+		<filter-name>Controller</filter-name>
+		<filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>Controller</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.servlet.filter.contextPath</param-name>
+			<param-value>/controller</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Controller</filter-name>
+		<url-pattern>/controller/*</url-pattern>
+	</filter-mapping>
+	
 	<!--  Servlet for the jsp dashboard -->
 	<filter>
 		<filter-name>dashboard</filter-name>

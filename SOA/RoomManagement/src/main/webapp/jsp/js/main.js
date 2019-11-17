@@ -20,16 +20,29 @@ var updateTime = function (){
 	element.textContent = getCurrentTimeDate();
 }
 
+var updateData = function (){
+	let res = httpGet("http://localhost:8484/RoomManagement/controller/all");
+	res = JSON.parse(res);
+	let nbRooms = document.getElementById("nbRooms");
+	nbRooms.textContent = res.length;
+
+	for(let i=0; i < res.length; i++){
+		let temp = document.getElementById("temp" + (i+1));
+		temp.textContent = res[i][2] + "°C";
+	}
+}
+
 var getOutsideTemp = function (){
 	var element = document.getElementById("outTemp");
 	let res = httpGet("http://localhost:8484/RoomManagement/temperature/out");
-	res = parseInt(res);
+	res = parseFloat(res);
 	res = res.toFixed(1);
 	element.textContent = res + "°C";
 }
 
 window.onload = function(){
 	var intervalID = setInterval(updateTime, 1000);
+	var intervalIData = setInterval(updateData, 1000);
 	getOutsideTemp();
 }
 
