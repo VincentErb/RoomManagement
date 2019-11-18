@@ -31,7 +31,7 @@ public class Windows {
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ArrayList<String>> getState() {
+	public static ArrayList<ArrayList<String>> getState() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = getlistURL();
@@ -70,7 +70,7 @@ public class Windows {
 	@Path("UrlList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getlistURL() {
+	public static ArrayList<String> getlistURL() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> RoomList = getUrlRoom();
@@ -102,7 +102,7 @@ public class Windows {
 	@Path("RoomList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getlistRoom() {
+	public static ArrayList<String> getlistRoom() {
 		Client client = ClientBuilder.newClient();
 		String jsonStr = client.target("http://127.0.0.1:8080/~/in-cse?fu=1&ty=16")
 				.request(MediaType.APPLICATION_JSON)
@@ -121,7 +121,7 @@ public class Windows {
 	@Path("RoomUrl")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<String> getUrlRoom() {
+	public static ArrayList<String> getUrlRoom() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = new ArrayList<String>();

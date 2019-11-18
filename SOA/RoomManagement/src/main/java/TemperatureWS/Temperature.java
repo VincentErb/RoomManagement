@@ -187,14 +187,19 @@ public class Temperature {
 	@POST
 	@Path("setTempe/{roomId}/{id}/{tempe}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void setTempe (@PathParam("roomId") Integer roomId, @PathParam("id") Integer id, @PathParam("tempe") Float tempe){
-		/*ContentInstance cin = new ContentInstance();
-		cin.setContent(String.valueOf(tempe));
+	public void setTempe (@PathParam("roomId") Integer roomId, @PathParam("id") Integer id, @PathParam("tempe") String tempe){
+		JsonObject con = new JsonObject();
+		con.addProperty("con", tempe);
+		JsonObject cin = new JsonObject();
+		cin.add("m2m:cin", con);
 		System.out.println(cin);
+		System.out.println("Coucou");
 		Client client = ClientBuilder.newClient();
 		Response resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
-				.path("TEMP_" + id + "/DATA/la")
-				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").post(Entity.entity(Serializer.toXML(cin), "application/xml;ty=4"));*/
+				.path("TEMP_" + id + "/DATA")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.header("Content-Type", "application/json;ty=4")
+				.post(Entity.json(cin));
 	}
 
 }

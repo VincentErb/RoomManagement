@@ -66,11 +66,17 @@ public class Controller {
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static ArrayList<ArrayList<String>> getAllInfo() {
+	public static Map<String, Object> getAllInfo() {
 		ArrayList<ArrayList<String>> TempeAll = new ArrayList<ArrayList<String>>();
 		TempeAll = TemperatureWS.Temperature.getTempe();
 		
-		return TempeAll;
+		ArrayList<ArrayList<String>> WindowAll = new ArrayList<ArrayList<String>>();
+		WindowAll = WindowsWS.Windows.getState();
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("temp", TempeAll);
+		map.put("window", WindowAll);
+		return map;
 	}
 	
 }
