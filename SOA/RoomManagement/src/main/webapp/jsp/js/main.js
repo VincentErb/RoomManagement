@@ -32,20 +32,32 @@ var updateData = function (){
 	nbRooms.textContent = tempData.length;
 
 	for(let i=0; i < tempData.length; i++){
-		let tempRes = document.getElementById("temp" + (i+1));
+		let tempRes = document.getElementById("temp" + tempData[i][1]);
 		tempRes.textContent = tempData[i][2] + "°C";
 	}
 	
 	let winData = data["window"];
-	let winRes = document.getElementById("win1-1");
-	winRes.textContent = winData[0][2]
-	winRes = document.getElementById("win1-2");
-	winRes.textContent = winData[1][2]
-	winRes = document.getElementById("win2-1");
-	winRes.textContent = winData[2][2]
-	winRes = document.getElementById("win2-2");
-	winRes.textContent = winData[3][2]
+	let nbOpen = 0;
+	
+	for(let j=0; j < winData.length; j++){
+		let winRes = document.getElementById("win" + winData[j][0] + winData[j][1]);
+		if(winData[j][2] === "1"){
+			winRes.textContent = "OPEN";
+			nbOpen++;
+		} else {
+			winRes.textContent = "CLOSED";
+		}	
+	}
+	
+	let elemOpen = document.getElementById("nbWinOpen");
+	elemOpen.textContent = nbOpen;
+	
+	elemOpen = document.getElementById("nbWinTotal");
+	elemOpen.textContent = winData.length;
+	
 }
+
+
 
 var getOutsideTemp = function (){
 	var element = document.getElementById("outTemp");

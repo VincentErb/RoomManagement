@@ -70,8 +70,16 @@ public class Controller {
 		ArrayList<ArrayList<String>> TempeAll = new ArrayList<ArrayList<String>>();
 		TempeAll = TemperatureWS.Temperature.getTempe();
 		
+		for (ArrayList<String> i : TempeAll){
+			i.set(0, i.get(0).substring(i.get(0).length() - 1));
+		}
+		
 		ArrayList<ArrayList<String>> WindowAll = new ArrayList<ArrayList<String>>();
 		WindowAll = WindowsWS.Windows.getState();
+		
+		for (ArrayList<String> j : WindowAll){
+			j.set(0, j.get(0).substring(j.get(0).length() - 1));
+		}
 		
 		Map<String,Object> map = new HashMap<>();
 		map.put("temp", TempeAll);

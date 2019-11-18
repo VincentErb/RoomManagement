@@ -195,10 +195,10 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Windows (closed)</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Windows (open)</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">4/4</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><a id="nbWinOpen">-</a>/<a id="nbWinTotal">-</a></div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -249,9 +249,9 @@
 	                  <div class="col-xl-6 col-lg-4">
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 1</div>
 	                  	<ul>
-	                  		<li class="h5 mb-4">Temperature : <a id="temp1">-</a></li>
-	                  		<li class="h5 mb-1">Window 1 : <a id="win1-1">-</a></li>
-	                  		<li class="h5 mb-4">Window 2 : <a id="win1-2">-</a></li>
+	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom1">-</a></b></li>
+	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room1">-</a></b></li>
+	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room1">-</a></b></li>
 	                  		<li class="h5 mb-1">Lamp 1 : <a>-</a></li>
 	                  		<li class="h5 mb-1">Lamp 2 : <a>-</a></li>
 	                  		<li class="h5 mb-1">Lamp 3 : <a>-</a></li>
@@ -260,9 +260,9 @@
 	                  <div class="col-xl-6 col-lg-4">
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 2</div>
 	                  	<ul>
-	                  		<li class="h5 mb-4">Temperature : <a id="temp2">-</a></li>
-	                  		<li class="h5 mb-1">Window 1 : <a id="win2-1">-</a></li>
-	                  		<li class="h5 mb-4">Window 2 : <a id="win2-2">-</a></li>
+	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom2">-</a></b></li>
+	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room2">-</a></b></li>
+	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room2">-</a></b></li>
 	                  		<li class="h5 mb-1">Lamp 1 : <a>-</a></li>
 	                  		<li class="h5 mb-1">Lamp 2 : <a>-</a></li>
 	                  		<li class="h5 mb-1">Lamp 3 : <a>-</a></li>
