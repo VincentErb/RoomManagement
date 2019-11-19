@@ -174,7 +174,7 @@ public class Windows {
 		Mapper mapper = new Mapper();
 		ContentInstance cin = new ContentInstance();
 		cin.setContent(String.valueOf(state));
-		System.out.println(mapper.marshal(cin));
+		
 		Client client = ClientBuilder.newClient();
 		Response resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
 				.path("WINDOW_" + id + "/STATUS")

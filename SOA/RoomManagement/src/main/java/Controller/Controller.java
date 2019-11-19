@@ -12,6 +12,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -20,6 +21,7 @@ import java.lang.Float;
 
 
 import TemperatureWS.Temperature;
+import Utils.JsonUtils;
 
 /**
  * Root resource (exposed at "resource" path)
@@ -67,20 +69,33 @@ public class Controller {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public static Map<String, Object> getAllInfo() {
-		ArrayList<ArrayList<String>> TempeAll = new ArrayList<ArrayList<String>>();
-		TempeAll = TemperatureWS.Temperature.getTempe();
+		
+		// Fetch all temperature values & format them for front-end
+		Client client = ClientBuilder.newClient();
+		String jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/temperature/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+
+		JsonArray jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> TempeAll = JsonUtils.getArrayFromJsonArray(jsonArray);
 		
 		for (ArrayList<String> i : TempeAll){
 			i.set(0, i.get(0).substring(i.get(0).length() - 1));
 		}
 		
-		ArrayList<ArrayList<String>> WindowAll = new ArrayList<ArrayList<String>>();
-		WindowAll = WindowsWS.Windows.getState();
+		// Fetch all window state values & format them for front-end
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/windows/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+		
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> WindowAll = JsonUtils.getArrayFromJsonArray(jsonArray);
 		
 		for (ArrayList<String> j : WindowAll){
 			j.set(0, j.get(0).substring(j.get(0).length() - 1));
 		}
 		
+		// Send an object : {temp : [[id,room,temp], ...], window : [[id,room,state],...]}
 		Map<String,Object> map = new HashMap<>();
 		map.put("temp", TempeAll);
 		map.put("window", WindowAll);
