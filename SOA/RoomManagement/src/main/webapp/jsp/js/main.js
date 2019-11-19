@@ -57,7 +57,9 @@ var updateData = function (){
 	
 }
 
-
+var manageRooms = function (){
+	let res = httpGet("http://localhost:8484/RoomManagement/controller/manage");
+}
 
 var getOutsideTemp = function (){
 	var element = document.getElementById("outTemp");
@@ -70,6 +72,7 @@ var getOutsideTemp = function (){
 window.onload = function(){
 	var intervalID = setInterval(updateTime, 1000);
 	var intervalIData = setInterval(updateData, 1000);
+	var intervalManage = setInterval(manageRooms, 3000);
 	getOutsideTemp();
 }
 

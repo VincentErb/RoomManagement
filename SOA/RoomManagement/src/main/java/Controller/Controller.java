@@ -2,7 +2,6 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.GET;
@@ -10,17 +9,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.lang.Float;
-
-
-
-import TemperatureWS.Temperature;
 import Utils.JsonUtils;
 
 /**
@@ -28,41 +25,67 @@ import Utils.JsonUtils;
  */
 @Path("")
 public class Controller {
-	public void manageRooms(){
+	
+	@Path("manage")
+	@GET
+	public String manageRooms(){
 		// Get the temperature of all room in a list of triplets [url, room label, value]
-		ArrayList<ArrayList<String>> allTemp = new ArrayList<ArrayList<String>>();
-		allTemp = TemperatureWS.Temperature.getTempe();
+		Client client = ClientBuilder.newClient();
+		String jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/temperature/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+
+		JsonArray jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> allTemp = JsonUtils.getArrayFromJsonArray(jsonArray);
 		
 		// Get external temperature
-		float externalTemp = TemperatureWS.Temperature.getOutsideTemperature();
+		float externalTemp = Float.parseFloat(client.target("http://127.0.0.1:8484/RoomManagement/temperature/out")
+				.request(MediaType.APPLICATION_JSON)
+				.get(String.class));
 		
 		// Get windows status
-		ArrayList<ArrayList<String>> allWindowsStatus = new ArrayList<ArrayList<String>>();
-		allWindowsStatus = WindowsWS.Windows.getState();
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/windows/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+		
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> allWindowsStatus = JsonUtils.getArrayFromJsonArray(jsonArray);
+		
+		for (ArrayList<String> l : allWindowsStatus){
+			l.set(0, l.get(0).substring(l.get(0).length() - 1));
+		}
 		
 		// Difference of temperature at which we open/close the window
-		float diffTemp = (float) 5.0;
+		float diffTemp = 5;
 		
 		for (int i = 0; i < allTemp.size(); i++){
 			float insideTemp = Float.parseFloat(allTemp.get(i).get(2));
 			//if the room is much hotter than the outside close the windows
-			if ( insideTemp - externalTemp > diffTemp){
+			if (insideTemp - externalTemp > diffTemp){
 				for (int j = 0; j < allWindowsStatus.size() ; j ++){
-					if (allWindowsStatus.get(j).get(1) == allTemp.get(i).get(1)){
-						//TODO : request setStatus 0
+					if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
+						Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
+								.path(String.valueOf(i+1)) // Room
+								.path("/" + allWindowsStatus.get(j).get(0)) // ID
+								.path("/0")
+								.request(MediaType.APPLICATION_JSON).post(null); 
 					}
 				}
 			}
 			// if the room is much cooler than the outside open the windows
 			else if ( insideTemp - externalTemp < -diffTemp){
 				for (int j = 0; j < allWindowsStatus.size() ; j ++){
-					if (allWindowsStatus.get(j).get(1) == allTemp.get(i).get(1)){
-						//TODO : request setStatus 1
+					if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
+						Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
+								.path(String.valueOf(i+1)) // Room
+								.path("/" + allWindowsStatus.get(j).get(0)) // ID
+								.path("/1")
+								.request(MediaType.APPLICATION_JSON).post(null); 
 					}
 				}
 			}
 		}
-		
+		return "OK";
 	}
 	
 	@Path("all")
