@@ -24,42 +24,55 @@ var updateTime = function (){
 }
 
 var updateData = function (){
-	let data = httpGet("http://localhost:8484/RoomManagement/controller/all");
-	data = JSON.parse(data);
+	var promiseData = new Promise(function(resolve, reject) {
+		let data = httpGet("http://localhost:8484/RoomManagement/controller/all");
+		resolve(data);
+	});
+	  
+	promiseData.then(function(value) {
+		console.log("promise met");
+		data = JSON.parse(value);
 	
-	let tempData = data["temp"];
-	let nbRooms = document.getElementById("nbRooms");
-	nbRooms.textContent = tempData.length;
+		let tempData = data["temp"];
+		let nbRooms = document.getElementById("nbRooms");
+		nbRooms.textContent = tempData.length;
 
-	for(let i=0; i < tempData.length; i++){
-		let tempRes = document.getElementById("temp" + tempData[i][1]);
-		tempRes.textContent = tempData[i][2] + "°C";
-	}
-	
-	let winData = data["window"];
-	let nbOpen = 0;
-	
-	for(let j=0; j < winData.length; j++){
-		let winRes = document.getElementById("win" + winData[j][0] + winData[j][1]);
-		if(winData[j][2] === "1"){
-			winRes.textContent = "OPEN";
-			nbOpen++;
-		} else {
-			winRes.textContent = "CLOSED";
-		}	
-	}
-	
-	let elemOpen = document.getElementById("nbWinOpen");
-	elemOpen.textContent = nbOpen;
-	
-	elemOpen = document.getElementById("nbWinTotal");
-	elemOpen.textContent = winData.length;
-	
+		for(let i=0; i < tempData.length; i++){
+			let tempRes = document.getElementById("temp" + tempData[i][1]);
+			tempRes.textContent = tempData[i][2] + "°C";
+		}
+		
+		let winData = data["window"];
+		let nbOpen = 0;
+		
+		for(let j=0; j < winData.length; j++){
+			let winRes = document.getElementById("win" + winData[j][0] + winData[j][1]);
+			if(winData[j][2] === "1"){
+				winRes.textContent = "OPEN";
+				nbOpen++;
+			} else {
+				winRes.textContent = "CLOSED";
+			}	
+		}
+		
+		let elemOpen = document.getElementById("nbWinOpen");
+		elemOpen.textContent = nbOpen;
+		
+		elemOpen = document.getElementById("nbWinTotal");
+		elemOpen.textContent = winData.length;
+		console.log("treatment done");
+	});
 }
 
 var manageRooms = function (){
-	let res = httpGet("http://localhost:8484/RoomManagement/controller/manage");
-	console.log("fecthing ...");
+	var promiseData = new Promise(function(resolve, reject) {
+		let res = httpGet("http://localhost:8484/RoomManagement/controller/manage");
+		resolve(res);
+	});
+
+	promiseData.then(function(value) {
+		console.log("fecthing ..." + res);
+	});
 }
 
 var getOutsideTemp = function (){
@@ -80,8 +93,9 @@ buttonSetTempe.onclick = function() {
 }
 
 window.onload = function(){
+	this.updateData();
 	var intervalID = setInterval(updateTime, 1000);
-	var intervalIData = setInterval(updateData, 1000);
+	var intervalIData = setInterval(updateData, 3000);
 	// var intervalManage = setInterval(manageRooms, 10000);
 	getOutsideTemp();
 	
