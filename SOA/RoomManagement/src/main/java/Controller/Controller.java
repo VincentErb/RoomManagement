@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,12 +16,15 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.om2m.commons.resource.ContentInstance;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.lang.Float;
 import Utils.JsonUtils;
+import fr.insa.om2m.mapper.Mapper;
 
 /**
  * Root resource (exposed at "resource" path)
@@ -88,6 +94,7 @@ public class Controller {
 		return "OK";
 	}
 	
+	
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -123,6 +130,19 @@ public class Controller {
 		map.put("temp", TempeAll);
 		map.put("window", WindowAll);
 		return map;
+	}
+	
+	@GET
+	@Path("setTempe/{roomId}/{tempe}")
+	public Response setRoomTempe (@PathParam("roomId") String roomId,  @PathParam("tempe") String tempe){
+		
+		Client client = ClientBuilder.newClient();
+		Response resp = client.target("http://127.0.0.1:8484/RoomManagement/temperature/setTempe/")
+				.path(roomId + "/1/")
+				.path(tempe)
+				.request(MediaType.APPLICATION_JSON)
+				.post(null);
+		return resp;
 	}
 	
 }

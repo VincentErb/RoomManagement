@@ -59,6 +59,7 @@ var updateData = function (){
 
 var manageRooms = function (){
 	let res = httpGet("http://localhost:8484/RoomManagement/controller/manage");
+	console.log("fecthing ...");
 }
 
 var getOutsideTemp = function (){
@@ -69,11 +70,23 @@ var getOutsideTemp = function (){
 	element.textContent = res + "°C";
 }
 
+let buttonSetTempe = document.getElementById("btnSetTempe");
+buttonSetTempe.onclick = function() {
+	let roomId = document.getElementById("roomSet");
+	let tempe = document.getElementById("tempeSet");
+	console.log("setting temperature to " + tempe.value + "°C in room " + roomId.value);
+	let res = httpGet("http://localhost:8484/RoomManagement/controller/setTempe/" + roomId.value + "/" + tempe.value);
+	console.log(res);
+}
+
 window.onload = function(){
 	var intervalID = setInterval(updateTime, 1000);
 	var intervalIData = setInterval(updateData, 1000);
-	var intervalManage = setInterval(manageRooms, 3000);
+	// var intervalManage = setInterval(manageRooms, 10000);
 	getOutsideTemp();
+	
 }
+
+
 
 

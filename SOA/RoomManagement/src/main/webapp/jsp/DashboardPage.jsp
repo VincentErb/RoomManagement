@@ -243,7 +243,7 @@
               <div class="card-header py-3">
                 	<h6 class="m-0 font-weight-bold text-primary">Building Overview</h6>
               </div>
-                <div class="card-body">
+                <div class="card-body mb-4">
                 	
                 	<div class="row">
 	                  <div class="col-xl-6 col-lg-4">
@@ -311,7 +311,38 @@
 
         </div>
         <!-- /.container-fluid -->
+        
+        
+		<div class="card shadow mb-4">
+	    	<div class="card-header py-3">
+           		<h6 class="m-0 font-weight-bold text-primary">Scenario parameters</h6>
+       		</div>
+       		<div class="card-body mb-1">
+       		<div class="row">
+				<div class="col-2">
+       	   			<div class="input-group">
+				  	<div class="input-group-prepend">
+				    	<span class="input-group-text" id="inputGroup-sizing-default">Room</span>
+				  	</div>
+				  	<input id="roomSet" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+				  	</div>
+       	   		</div>
+       	   		<div class="col-3">
+       	   			<div class="input-group">
+				  	<div class="input-group-prepend">
+				    	<span class="input-group-text" id="inputGroup-sizing-default">Temperature</span>
+				  	</div>
+				  	<input id="tempeSet" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+				  	</div>
+       	   		</div>
 
+       	   		<div class="col-sm">
+       	   			<a class="btn btn-info" href="#" id="btnSetTempe">
+				  		Set temperature
+					</a>
+       	   		</div> 			
+       		</div>
+       	</div>
       </div>
       <!-- End of Main Content -->
 
