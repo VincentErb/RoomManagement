@@ -201,7 +201,7 @@ public class Controller {
 	public Response setRoomLight (@PathParam("roomId") String roomId,  @PathParam("light") String light){
 		
 		Client client = ClientBuilder.newClient();
-		Response resp = client.target("http://127.0.0.1:8484/RoomManagement/gas/setGas/")
+		Response resp = client.target("http://127.0.0.1:8484/RoomManagement/light/setLight/")
 				.path(roomId + "/1/")
 				.path(light)
 				.request(MediaType.APPLICATION_JSON)
