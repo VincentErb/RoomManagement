@@ -113,6 +113,30 @@ public class Controller {
 			i.set(0, i.get(0).substring(i.get(0).length() - 1));
 		}
 		
+		// Fetch all gas sensor values & format them for front-end
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/gas/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> GasAll = JsonUtils.getArrayFromJsonArray(jsonArray);
+		
+		for (ArrayList<String> i : GasAll){
+			i.set(0, i.get(0).substring(i.get(0).length() - 1));
+		}
+		
+		// Fetch all light sensor values & format them for front-end
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/light/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> LightAll = JsonUtils.getArrayFromJsonArray(jsonArray);
+		
+		for (ArrayList<String> i : LightAll){
+			i.set(0, i.get(0).substring(i.get(0).length() - 1));
+		}
+		
 		// Fetch all window state values & format them for front-end
 		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/windows/all")
 				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
@@ -125,10 +149,25 @@ public class Controller {
 			j.set(0, j.get(0).substring(j.get(0).length() - 1));
 		}
 		
+		// Fetch all lamp state values & format them for front-end
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/lamp/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+		
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> LampAll = JsonUtils.getArrayFromJsonArray(jsonArray);
+		
+		for (ArrayList<String> j : LampAll){
+			j.set(0, j.get(0).substring(j.get(0).length() - 1));
+		}
+		
 		// Send an object : {temp : [[id,room,temp], ...], window : [[id,room,state],...]}
 		Map<String,Object> map = new HashMap<>();
 		map.put("temp", TempeAll);
+		map.put("gas", GasAll);
+		map.put("light", LightAll);
 		map.put("window", WindowAll);
+		map.put("lamp", LampAll);
 		return map;
 	}
 	
@@ -145,4 +184,28 @@ public class Controller {
 		return resp;
 	}
 	
+	@GET
+	@Path("setGas/{roomId}/{gas}")
+	public Response setRoomGas (@PathParam("roomId") String roomId,  @PathParam("gas") String gas){
+		Client client = ClientBuilder.newClient();
+		Response resp = client.target("http://127.0.0.1:8484/RoomManagement/gas/setGas/")
+				.path(roomId + "/1/")
+				.path(gas)
+				.request(MediaType.APPLICATION_JSON)
+				.post(null);
+		return resp;
+	}
+	
+	@GET
+	@Path("setLight/{roomId}/{light}")
+	public Response setRoomLight (@PathParam("roomId") String roomId,  @PathParam("light") String light){
+		
+		Client client = ClientBuilder.newClient();
+		Response resp = client.target("http://127.0.0.1:8484/RoomManagement/gas/setGas/")
+				.path(roomId + "/1/")
+				.path(light)
+				.request(MediaType.APPLICATION_JSON)
+				.post(null);
+		return resp;
+	}
 }

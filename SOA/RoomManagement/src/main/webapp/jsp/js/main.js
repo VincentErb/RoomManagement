@@ -30,12 +30,12 @@ var updateData = function (){
 	});
 	  
 	promiseData.then(function(value) {
-		console.log("promise met");
 		data = JSON.parse(value);
 	
 		let tempData = data["temp"];
 		let nbRooms = document.getElementById("nbRooms");
-		nbRooms.textContent = tempData.length;
+		let numberRooms = tempData.length;
+		nbRooms.textContent = numberRooms;
 
 		for(let i=0; i < tempData.length; i++){
 			let tempRes = document.getElementById("temp" + tempData[i][1]);
@@ -53,14 +53,48 @@ var updateData = function (){
 			} else {
 				winRes.textContent = "CLOSED";
 			}	
-		}
+		}	
 		
 		let elemOpen = document.getElementById("nbWinOpen");
 		elemOpen.textContent = nbOpen;
 		
 		elemOpen = document.getElementById("nbWinTotal");
 		elemOpen.textContent = winData.length;
-		console.log("treatment done");
+		
+		let gasData = data["gas"];
+		
+		for(let i=0; i < gasData.length; i++){
+			let tempRes = document.getElementById("gas" + gasData[i][1]);
+			tempRes.textContent = gasData[i][2] + "%";
+		}
+		
+		let lightData = data["light"];
+		
+		for(let i=0; i < lightData.length; i++){
+			let tempRes = document.getElementById("light" + lightData[i][1]);
+			tempRes.textContent = lightData[i][2];
+		}
+		
+		let lampData = data["lamp"];
+		let lightab = new Array(numberRooms);
+		lightab.fill(0, 0, numberRooms);
+		
+		for(let i=0; i < lampData.length; i++){
+			if(lampData[i][2] === "1"){
+				for(let j=0; j < numberRooms; j++){
+					let str = "room" + (j+1);
+					if(lampData[i][1] === str){
+						lightab[j]++;
+					}
+				}
+			}
+		}
+		
+		for (let k=0; k<numberRooms;k++){
+			let l = document.getElementById("lampsroom" + (k+1));
+			l.textContent = lightab[k] + "/" + "3";
+		}
+		
 	});
 }
 
@@ -85,10 +119,28 @@ var getOutsideTemp = function (){
 
 let buttonSetTempe = document.getElementById("btnSetTempe");
 buttonSetTempe.onclick = function() {
-	let roomId = document.getElementById("roomSet");
+	let roomId = document.getElementById("roomSett");
 	let tempe = document.getElementById("tempeSet");
 	console.log("setting temperature to " + tempe.value + "°C in room " + roomId.value);
 	let res = httpGet("http://localhost:8484/RoomManagement/controller/setTempe/" + roomId.value + "/" + tempe.value);
+	console.log(res);
+}
+
+let buttonSetGas = document.getElementById("btnSetGas");
+buttonSetGas.onclick = function() {
+	let roomId = document.getElementById("roomSetg");
+	let gas = document.getElementById("gasSet");
+	console.log("setting gas to " + gas.value + "/ in room " + roomId.value);
+	let res = httpGet("http://localhost:8484/RoomManagement/controller/setGas/" + roomId.value + "/" + gas.value);
+	console.log(res);
+}
+
+let buttonSetLight = document.getElementById("btnSetLight");
+buttonSetLight.onclick = function() {
+	let roomId = document.getElementById("roomSetl");
+	let light = document.getElementById("lightSet");
+	console.log("setting light to " + light.value + " in room " + light.value);
+	let res = httpGet("http://localhost:8484/RoomManagement/controller/setLight/" + roomId.value + "/" + light.value);
 	console.log(res);
 }
 

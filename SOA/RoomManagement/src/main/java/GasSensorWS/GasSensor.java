@@ -55,7 +55,7 @@ public class GasSensor {
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);
 			JsonObject jsonObject1 = JsonParser.parseString(infoStr).getAsJsonObject();
-			String lbl = jsonObject1.get("m2m:ae").getAsJsonObject().get("lbl").getAsJsonArray().get(2).getAsString();
+			String lbl = UrlList.get(n).split("/")[2];
 			Triplet.add(lbl);
 			
 			String jsonStr = client.target("http://127.0.0.1:8080/~")
@@ -169,16 +169,17 @@ public class GasSensor {
 	}
 	
 	@POST
-	@Path("setTempe/{roomId}/{id}/{tempe}")
+	@Path("setGas/{roomId}/{id}/{gas}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response setTempe (@PathParam("roomId") Integer roomId, @PathParam("id") Integer id, @PathParam("tempe") String tempe){
+	public Response setGas (@PathParam("roomId") Integer roomId, @PathParam("id") Integer id, @PathParam("gas") String gas){
+		
 		Mapper mapper = new Mapper();
 		ContentInstance cin = new ContentInstance();
-		cin.setContent(tempe);
+		cin.setContent(gas);
 		
 		Client client = ClientBuilder.newClient();
 		Response resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
-				.path("TEMP_" + id + "/DATA")
+				.path("GAS_" + id + "/DATA")
 				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").post(Entity.entity(mapper.marshal(cin), "application/xml;ty=4"));
 		return resp;
 	}

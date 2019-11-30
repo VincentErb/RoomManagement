@@ -249,7 +249,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Outside temperature</div>
-                      <div id="outTemp" class="h5 mb-0 font-weight-bold text-gray-800">-ï¿½C</div>
+                      <div id="outTemp" class="h5 mb-0 font-weight-bold text-gray-800">-°C</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -277,22 +277,22 @@
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 1</div>
 	                  	<ul>
 	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom1">-</a></b></li>
-	                  		<li class="h5 mb-4">Air pollution : <b><a id="gasroom1">-</a></b></li>
+	                  		<li class="h5 mb-4">Air quality : <b><a id="gasroom1">-</a></b></li>
 	                  		<li class="h5 mb-4">Light intensity : <b><a id="lightroom1">-</a></b></li>
 	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room1">-</a></b></li>
 	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room1">-</a></b></li>
-	                  		<li class="h5 mb-1">Lamps : <a id="lampsroom1">-/-</a></li>
+	                  		<li class="h5 mb-1">Lamps : <b><a id="lampsroom1">-/-</a> </b></li>
 	                  	</ul>
 	                  </div>
 	                  <div class="col-xl-6 col-lg-4">
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 2</div>
 	                  	<ul>
 	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom2">-</a></b></li>
-	                  		<li class="h5 mb-4">Air pollution : <b><a id="gasroom2">-</a></b></li>
+	                  		<li class="h5 mb-4">Air quality : <b><a id="gasroom2">-</a></b></li>
 	                  		<li class="h5 mb-4">Light intensity : <b><a id="lightroom2">-</a></b></li>
 	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room2">-</a></b></li>
 	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room2">-</a></b></li>
-	                  		<li class="h5 mb-1">Lamps : <a id="lampsroom2">-/-</a></li>
+	                  		<li class="h5 mb-1">Lamps : <b><a id="lampsroom2">-/-</a> </b></li>
 	                  	</ul>
 	                  </div>
 	                </div>
@@ -345,13 +345,13 @@
            		<h6 class="m-0 font-weight-bold text-primary">Scenario parameters</h6>
        		</div>
        		<div class="card-body mb-1">
-       		<div class="row">
+       		<div class="row mb-3">
 				<div class="col-2">
        	   			<div class="input-group">
 				  	<div class="input-group-prepend">
 				    	<span class="input-group-text" id="inputGroup-sizing-default">Room</span>
 				  	</div>
-				  	<input id="roomSet" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+				  	<input id="roomSett" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 				  	</div>
        	   		</div>
        	   		<div class="col-3">
@@ -369,6 +369,57 @@
 					</a>
        	   		</div> 			
        		</div>
+       		
+       		<div class="row mb-3">
+				<div class="col-2">
+       	   			<div class="input-group">
+				  	<div class="input-group-prepend">
+				    	<span class="input-group-text" id="inputGroup-sizing-default">Room</span>
+				  	</div>
+				  	<input id="roomSetg" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+				  	</div>
+       	   		</div>
+       	   		<div class="col-3">
+       	   			<div class="input-group">
+				  	<div class="input-group-prepend">
+				    	<span class="input-group-text" id="inputGroup-sizing-default">Air quality</span>
+				  	</div>
+				  	<input id="gasSet" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+				  	</div>
+       	   		</div>
+
+       	   		<div class="col-sm">
+       	   			<a class="btn btn-info" href="#" id="btnSetGas">
+				  		Set air quality
+					</a>
+       	   		</div> 			
+       		</div>
+       		
+       		<div class="row">
+				<div class="col-2">
+       	   			<div class="input-group">
+				  	<div class="input-group-prepend">
+				    	<span class="input-group-text" id="inputGroup-sizing-default">Room</span>
+				  	</div>
+				  	<input id="roomSetl" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+				  	</div>
+       	   		</div>
+       	   		<div class="col-3">
+       	   			<div class="input-group">
+				  	<div class="input-group-prepend">
+				    	<span class="input-group-text" id="inputGroup-sizing-default">Light intensity</span>
+				  	</div>
+				  	<input id="lightSet" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+				  	</div>
+       	   		</div>
+
+       	   		<div class="col-sm">
+       	   			<a class="btn btn-info" href="#" id="btnSetLight">
+				  		Set light intensity
+					</a>
+       	   		</div> 			
+       		</div>
+       		
        	</div>
       </div>
       <!-- End of Main Content -->
@@ -377,7 +428,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Maxime Arens, Vincent Erb & Marine Pï¿½fau 2019</span>
+            <span>Copyright &copy; Maxime Arens, Vincent Erb & Marine Péfau 2019</span>
           </div>
         </div>
       </footer>

@@ -52,7 +52,7 @@ public class Lamp {
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);
 			JsonObject jsonObject1 = JsonParser.parseString(infoStr).getAsJsonObject();
-			String lbl = jsonObject1.get("m2m:ae").getAsJsonObject().get("lbl").getAsJsonArray().get(2).getAsString();
+			String lbl = UrlList.get(n).split("/")[2];
 			Triplet.add(lbl);
 			
 			String jsonStr = client.target("http://127.0.0.1:8080/~")
