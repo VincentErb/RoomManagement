@@ -34,7 +34,7 @@ public class Controller {
 	
 	@Path("manage")
 	@GET
-	public String manageRooms(){
+	public static String manageRooms(){
 		// Get the temperature of all room in a list of triplets [url, room label, value]
 		Client client = ClientBuilder.newClient();
 		String jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/temperature/all")
