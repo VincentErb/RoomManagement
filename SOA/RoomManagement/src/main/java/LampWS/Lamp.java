@@ -1,4 +1,4 @@
-package WindowsWS;
+package LampWS;
 
 import java.util.ArrayList;
 import java.lang.reflect.Type;
@@ -31,7 +31,7 @@ import com.google.gson.reflect.TypeToken;
  */
 @Path("")
 
-public class Windows {
+public class Lamp {
 	
 	@Path("all")
 	@GET
@@ -52,7 +52,7 @@ public class Windows {
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);
 			JsonObject jsonObject1 = JsonParser.parseString(infoStr).getAsJsonObject();
-			String lbl = UrlList.get(n).split("/")[2];
+			String lbl = jsonObject1.get("m2m:ae").getAsJsonObject().get("lbl").getAsJsonArray().get(2).getAsString();
 			Triplet.add(lbl);
 			
 			String jsonStr = client.target("http://127.0.0.1:8080/~")
@@ -63,8 +63,8 @@ public class Windows {
 					.get(String.class);
 
 			JsonObject jsonObject = JsonParser.parseString(jsonStr).getAsJsonObject();
-			String winStatus = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
-			Triplet.add(winStatus);
+			String lampStatus = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
+			Triplet.add(lampStatus);
 			StateAll.add(Triplet);
 		}
 		return StateAll;
@@ -87,16 +87,16 @@ public class Windows {
 					.path(RoomList.get(n))
 					// room1-cse/room1
 					.queryParam("fu", 1)
-					.queryParam("lbl", "Category/window")
+					.queryParam("lbl", "Category/lamp")
 					.request(MediaType.APPLICATION_JSON)
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);
 
 			JsonObject jsonObject = JsonParser.parseString(jsonStr).getAsJsonObject();
-			JsonArray liststate = jsonObject.getAsJsonArray("m2m:uril");
+			JsonArray listlamp = jsonObject.getAsJsonArray("m2m:uril");
 
 			Type listType = new TypeToken<ArrayList<String>>(){}.getType();
-			ArrayList<String> finalList = new Gson().fromJson(liststate, listType);
+			ArrayList<String> finalList = new Gson().fromJson(listlamp, listType);
 
 			UrlAll.addAll(finalList);
 		}
@@ -115,10 +115,10 @@ public class Windows {
 				.get(String.class);
 
 		JsonObject jsonObject = JsonParser.parseString(jsonStr).getAsJsonObject();
-		JsonArray listRoom = jsonObject.getAsJsonArray("m2m:uril");
+		JsonArray listlamp = jsonObject.getAsJsonArray("m2m:uril");
 
 		Type listType = new TypeToken<ArrayList<String>>(){}.getType();
-		ArrayList<String> finalList = new Gson().fromJson(listRoom, listType);
+		ArrayList<String> finalList = new Gson().fromJson(listlamp, listType);
 
 		return finalList;
 	}
@@ -157,14 +157,14 @@ public class Windows {
 		
 		Client client = ClientBuilder.newClient();
 		String resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
-				.path("WINDOW_" + id + "/STATUS/la")
+				.path("LAMP_" + id + "/STATUS/la")
 				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").get(String.class);
 
 		
 			JsonObject jsonObject = JsonParser.parseString(resp).getAsJsonObject();
-			String wdstate = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
+			String lampstatus = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
 
-	return wdstate; 	
+	return lampstatus; 	
 	}
 	
 	@POST
@@ -177,7 +177,7 @@ public class Windows {
 		
 		Client client = ClientBuilder.newClient();
 		Response resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
-				.path("WINDOW_" + id + "/STATUS")
+				.path("LAMP_" + id + "/STATUS")
 				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").post(Entity.entity(mapper.marshal(cin), "application/xml;ty=4"));
 		
 	}
