@@ -87,7 +87,7 @@ public class Windows {
 					.path(RoomList.get(n))
 					// room1-cse/room1
 					.queryParam("fu", 1)
-					.queryParam("lbl", "Type/actuator")
+					.queryParam("lbl", "Category/window")
 					.request(MediaType.APPLICATION_JSON)
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);

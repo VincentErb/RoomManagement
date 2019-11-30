@@ -107,7 +107,7 @@ public class Temperature {
 					.path(RoomList.get(n))
 					// room1-cse/room1
 					.queryParam("fu", 1)
-					.queryParam("lbl", "Type/sensor")
+					.queryParam("lbl", "Category/temperature")
 					.request(MediaType.APPLICATION_JSON)
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);
