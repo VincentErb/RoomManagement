@@ -39,6 +39,43 @@
 		<url-pattern>/gas/*</url-pattern>
 	</filter-mapping>
 	
+	<!--  Servlet for the gas sensor web service -->
+	<filter>
+		<filter-name>LightWS</filter-name>
+		<filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>LightWS</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.servlet.filter.contextPath</param-name>
+			<param-value>/light</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>LightWS</filter-name>
+		<url-pattern>/light/*</url-pattern>
+	</filter-mapping>
+	
+	<!--  Servlet for the gas sensor web service -->
+	<filter>
+		<filter-name>LampWS</filter-name>
+		<filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>LampWS</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.servlet.filter.contextPath</param-name>
+			<param-value>/lamp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>LampWS</filter-name>
+		<url-pattern>/lamp/*</url-pattern>
+	</filter-mapping>
+	
+	
 	<!--  Servlet for the controller web service -->
 	<filter>
 		<filter-name>Controller</filter-name>

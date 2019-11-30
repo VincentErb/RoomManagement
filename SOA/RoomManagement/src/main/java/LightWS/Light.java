@@ -1,4 +1,4 @@
-package WindowsWS;
+package LightWS;
 
 import java.util.ArrayList;
 import java.lang.reflect.Type;
@@ -16,13 +16,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.eclipse.om2m.commons.resource.ContentInstance;
-import fr.insa.om2m.mapper.Mapper;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+
+import fr.insa.om2m.mapper.Mapper;
+
 
 
 
@@ -31,16 +33,16 @@ import com.google.gson.reflect.TypeToken;
  */
 @Path("")
 
-public class Windows {
+public class Light {
 	
 	@Path("all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static ArrayList<ArrayList<String>> getState() {
+	public static ArrayList<ArrayList<String>> getLight() {
 		Client client = ClientBuilder.newClient();
 
 		ArrayList<String> UrlList = getlistURL();
-		ArrayList<ArrayList<String>> StateAll = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> LightAll = new ArrayList<ArrayList<String>>();
 
 		for (int n = 0; n < UrlList.size(); n++) {
 			ArrayList<String> Triplet = new ArrayList<String>();
@@ -57,20 +59,19 @@ public class Windows {
 			
 			String jsonStr = client.target("http://127.0.0.1:8080/~")
 					.path(UrlList.get(n))
-					.path("/STATUS/la")
+					.path("/DATA/la")
 					.request(MediaType.APPLICATION_JSON)
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);
 
 			JsonObject jsonObject = JsonParser.parseString(jsonStr).getAsJsonObject();
-			String winStatus = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
-			Triplet.add(winStatus);
-			StateAll.add(Triplet);
+			String light = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
+			Triplet.add(light);
+			LightAll.add(Triplet);
 		}
-		return StateAll;
+		return LightAll;
 	}
 
-	
 
 	@Path("UrlList")
 	@GET
@@ -87,16 +88,16 @@ public class Windows {
 					.path(RoomList.get(n))
 					// room1-cse/room1
 					.queryParam("fu", 1)
-					.queryParam("lbl", "Category/window")
+					.queryParam("lbl", "Category/light")
 					.request(MediaType.APPLICATION_JSON)
 					.header("X-M2M-Origin", "admin:admin")
 					.get(String.class);
 
 			JsonObject jsonObject = JsonParser.parseString(jsonStr).getAsJsonObject();
-			JsonArray liststate = jsonObject.getAsJsonArray("m2m:uril");
+			JsonArray listlight = jsonObject.getAsJsonArray("m2m:uril");
 
 			Type listType = new TypeToken<ArrayList<String>>(){}.getType();
-			ArrayList<String> finalList = new Gson().fromJson(liststate, listType);
+			ArrayList<String> finalList = new Gson().fromJson(listlight, listType);
 
 			UrlAll.addAll(finalList);
 		}
@@ -115,10 +116,10 @@ public class Windows {
 				.get(String.class);
 
 		JsonObject jsonObject = JsonParser.parseString(jsonStr).getAsJsonObject();
-		JsonArray listRoom = jsonObject.getAsJsonArray("m2m:uril");
+		JsonArray listlight = jsonObject.getAsJsonArray("m2m:uril");
 
 		Type listType = new TypeToken<ArrayList<String>>(){}.getType();
-		ArrayList<String> finalList = new Gson().fromJson(listRoom, listType);
+		ArrayList<String> finalList = new Gson().fromJson(listlight, listType);
 
 		return finalList;
 	}
@@ -153,33 +154,33 @@ public class Windows {
 	@GET
 	@Path("{roomId}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getState(@PathParam("roomId") Integer roomId, @PathParam("id") Integer id) {
+	public String getLight(@PathParam("roomId") Integer roomId, @PathParam("id") Integer id) {
 		
 		Client client = ClientBuilder.newClient();
 		String resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
-				.path("WINDOW_" + id + "/STATUS/la")
+				.path("LIGHT_" + id + "/DATA/la")
 				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").get(String.class);
 
 		
 			JsonObject jsonObject = JsonParser.parseString(resp).getAsJsonObject();
-			String wdstate = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
+			String light = jsonObject.getAsJsonObject("m2m:cin").get("con").getAsString();
 
-	return wdstate; 	
+	return light; 	
 	}
 	
 	@POST
-	@Path("setState/{roomId}/{id}/{state}")
+	@Path("setLight/{roomId}/{id}/{light}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void setState (@PathParam("roomId") Integer roomId, @PathParam("id") Integer id, @PathParam("state") Integer state){
+	public Response setLight (@PathParam("roomId") Integer roomId, @PathParam("id") Integer id, @PathParam("light") String light){
 		Mapper mapper = new Mapper();
 		ContentInstance cin = new ContentInstance();
-		cin.setContent(String.valueOf(state));
+		cin.setContent(light);
 		
 		Client client = ClientBuilder.newClient();
 		Response resp = client.target("http://127.0.0.1:8080/~/room"+roomId+"-cse/room"+roomId)
-				.path("WINDOW_" + id + "/STATUS")
+				.path("LIGHT_" + id + "/DATA")
 				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin").post(Entity.entity(mapper.marshal(cin), "application/xml;ty=4"));
-		
+		return resp;
 	}
 
 }
