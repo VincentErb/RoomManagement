@@ -1,0 +1,2203 @@
+{
+	"info": {
+		"_postman_id": "05be953c-47b1-4275-bef4-c5c2581ab020",
+		"name": "First Scenario",
+		"description": "Premier scénario, implémente deux salles, des capteurs de température et des actionneurs de fenêtre dans chaque salle.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create temp room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/temperature\", \"Location/room\"],\r\n     \"rn\": \"TEMP_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create gas room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=2"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/gas\", \"Location/room\"],\r\n     \"rn\": \"GAS_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create light room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=2"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/light\", \"Location/room\"],\r\n     \"rn\": \"LIGHT_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create window1 room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/window\", \"Location/room\"],\r\n     \"rn\": \"WINDOW_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create window2 room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/window\", \"Location/room\"],\r\n     \"rn\": \"WINDOW_2\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create lamp1 room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=2"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/lamp\", \"Location/room\"],\r\n     \"rn\": \"LAMP_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create lamp2 room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=2"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/lamp\", \"Location/room\"],\r\n     \"rn\": \"LAMP_2\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create lamp3 room 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=2"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/lamp\", \"Location/room\"],\r\n     \"rn\": \"LAMP_3\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create gas room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/temperature\", \"Location/room\"],\r\n     \"rn\": \"GAS_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create temp room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/temperature\", \"Location/room\"],\r\n     \"rn\": \"TEMP_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create light room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/light\", \"Location/room\"],\r\n     \"rn\": \"LIGHT_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create lamp1 room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/lamp\", \"Location/room\"],\r\n     \"rn\": \"LAMP_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create lamp2 room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/lamp\", \"Location/room\"],\r\n     \"rn\": \"LAMP_2\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create lamp3 room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/lamp\", \"Location/room\"],\r\n     \"rn\": \"LAMP_3\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create window1 room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/window\", \"Location/room\"],\r\n     \"rn\": \"WINDOW_1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create window2 room 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/actuator\", \"Category/window\", \"Location/room\"],\r\n     \"rn\": \"WINDOW_2\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"WINDOW_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"WINDOW_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LAMP_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LAMP_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LAMP_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/TEMP_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"DATA\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/TEMP_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"TEMP_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/GAS_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=3"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"DATA\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/GAS_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"GAS_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LIGHT_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=3"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"DATA\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LIGHT_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LIGHT_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"WINDOW_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"WINDOW_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LAMP_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LAMP_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"STATUS\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LAMP_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/TEMP_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"DATA\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/TEMP_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"TEMP_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/GAS_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=3"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"DATA\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/GAS_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"GAS_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LIGHT_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=3"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cnt\": {\r\n     \"rn\": \"DATA\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LIGHT_1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LIGHT_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_1/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=4",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"0\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_1/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"WINDOW_1",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_2/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=4",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/WINDOW_2/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"WINDOW_2",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_1/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_1/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LAMP_1",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_2/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_2/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LAMP_2",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_3/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LAMP_3/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LAMP_3",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/TEMP_1/DATA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"24.1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/TEMP_1/DATA",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"TEMP_1",
+						"DATA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/GAS_1/DATA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"74.1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/GAS_1/DATA",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"GAS_1",
+						"DATA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LIGHT_1/DATA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"0.129\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LIGHT_1/DATA",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LIGHT_1",
+						"DATA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_1/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=4",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"0\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_1/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"WINDOW_1",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_2/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=4",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/WINDOW_2/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"WINDOW_2",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_1/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_1/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LAMP_1",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_2/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_2/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LAMP_2",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_3/STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"1\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room1-cse/room1/LAMP_3/STATUS",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room1-cse",
+						"room1",
+						"LAMP_3",
+						"STATUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/TEMP_1/DATA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=4",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"23.8\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/TEMP_1/DATA",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"TEMP_1",
+						"DATA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/GAS_1/DATA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; ty=4",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"73.8\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/GAS_1/DATA",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"GAS_1",
+						"DATA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8080/~/room2-cse/room2/LIGHT_1/DATA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "admin:admin"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json; ty=4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"m2m:cin\": {\r\n     \"con\": \"0.382\"\r\n   }\r\n }\r\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/~/room2-cse/room2/LIGHT_1/DATA",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"~",
+						"room2-cse",
+						"room2",
+						"LIGHT_1",
+						"DATA"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

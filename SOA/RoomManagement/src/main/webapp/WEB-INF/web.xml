@@ -21,6 +21,24 @@
 		<url-pattern>/temperature/*</url-pattern>
 	</filter-mapping>
 	
+	<!--  Servlet for the gas sensor web service -->
+	<filter>
+		<filter-name>GasSensorWS</filter-name>
+		<filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>GasSensorWS</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.servlet.filter.contextPath</param-name>
+			<param-value>/gas</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>GasSensorWS</filter-name>
+		<url-pattern>/gas/*</url-pattern>
+	</filter-mapping>
+	
 	<!--  Servlet for the controller web service -->
 	<filter>
 		<filter-name>Controller</filter-name>

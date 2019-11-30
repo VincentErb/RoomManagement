@@ -66,6 +66,13 @@
           <span>Room 2</span></a>
       </li>
 
+      <!-- Nav Item - Window -->
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Room 3</span></a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -88,6 +95,26 @@
           <span>Window</span></a>
       </li>
 
+	  <!-- Nav Item - Window -->
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Light sensor</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Gas sensor</span></a>
+      </li>
+      
+      <!-- Nav Item - Window -->
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Lamp</span></a>
+      </li>
+		
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -222,7 +249,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Outside temperature</div>
-                      <div id="outTemp" class="h5 mb-0 font-weight-bold text-gray-800">-°C</div>
+                      <div id="outTemp" class="h5 mb-0 font-weight-bold text-gray-800">-ï¿½C</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -250,22 +277,22 @@
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 1</div>
 	                  	<ul>
 	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom1">-</a></b></li>
+	                  		<li class="h5 mb-4">Air pollution : <b><a id="gasroom1">-</a></b></li>
+	                  		<li class="h5 mb-4">Light intensity : <b><a id="lightroom1">-</a></b></li>
 	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room1">-</a></b></li>
 	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room1">-</a></b></li>
-	                  		<li class="h5 mb-1">Lamp 1 : <a>-</a></li>
-	                  		<li class="h5 mb-1">Lamp 2 : <a>-</a></li>
-	                  		<li class="h5 mb-1">Lamp 3 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamps : <a id="lampsroom1">-/-</a></li>
 	                  	</ul>
 	                  </div>
 	                  <div class="col-xl-6 col-lg-4">
 	                  	<div class="h4 mb-4 font-weight-bold text-gray-800">Room 2</div>
 	                  	<ul>
 	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom2">-</a></b></li>
+	                  		<li class="h5 mb-4">Air pollution : <b><a id="gasroom2">-</a></b></li>
+	                  		<li class="h5 mb-4">Light intensity : <b><a id="lightroom2">-</a></b></li>
 	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room2">-</a></b></li>
 	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room2">-</a></b></li>
-	                  		<li class="h5 mb-1">Lamp 1 : <a>-</a></li>
-	                  		<li class="h5 mb-1">Lamp 2 : <a>-</a></li>
-	                  		<li class="h5 mb-1">Lamp 3 : <a>-</a></li>
+	                  		<li class="h5 mb-1">Lamps : <a id="lampsroom2">-/-</a></li>
 	                  	</ul>
 	                  </div>
 	                </div>
@@ -350,7 +377,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Maxime Arens, Vincent Erb & Marine Péfau 2019</span>
+            <span>Copyright &copy; Maxime Arens, Vincent Erb & Marine Pï¿½fau 2019</span>
           </div>
         </div>
       </footer>
