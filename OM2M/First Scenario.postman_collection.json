@@ -382,7 +382,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/temperature\", \"Location/room\"],\r\n     \"rn\": \"GAS_1\"\r\n   }\r\n }\r\n"
+					"raw": " \t\r\n\r\n{\r\n   \"m2m:ae\": {\r\n     \"api\": \"app-sensor\",\r\n     \"rr\": \"false\",\r\n     \"lbl\": [\"Type/sensor\", \"Category/gas\", \"Location/room\"],\r\n     \"rn\": \"GAS_1\"\r\n   }\r\n }\r\n"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:8080/~/room2-cse",
