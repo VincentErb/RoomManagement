@@ -49,29 +49,23 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Rooms
+        Scenarios
       </div>
 
       <!-- Nav Item - Window -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="#" data-toggle="popover" title="First scenario" data-content="If the temperature of a room is 5°C lower than the outside temperature, open the window to bring in the heat. If it is 5°C hotter, close the windows to keep the heat. If air quality is below 70%, open the windows regardless">
           <i class="fas fa-fw fa-table"></i>
-          <span>Room 1</span></a>
+          <span>Scenario 1</span></a>
       </li>
 
       <!-- Nav Item - Window -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="#" data-toggle="popover" title="Second scenario" data-content="lorem ipsum dokeodkeokdm smodk eri oismoi">
           <i class="fas fa-fw fa-table"></i>
-          <span>Room 2</span></a>
+          <span>Scenario 2</span></a>
       </li>
 
-      <!-- Nav Item - Window -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Room 3</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -278,9 +272,9 @@
 	                  	<ul>
 	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom1">-</a></b></li>
 	                  		<li class="h5 mb-4">Air quality : <b><a id="gasroom1">-</a></b></li>
-	                  		<li class="h5 mb-4">Light intensity : <b><a id="lightroom1">-</a></b></li>
 	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room1">-</a></b></li>
-	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room1">-</a></b></li>
+	                  		<li class="h5 mb-5">Window 2 : <b><a id="win2room1">-</a></b></li>
+	                  		<li class="h5 mb-1">Light intensity : <b><a id="lightroom1">-</a></b></li>
 	                  		<li class="h5 mb-1">Lamps : <b><a id="lampsroom1">-/-</a> </b></li>
 	                  	</ul>
 	                  </div>
@@ -289,9 +283,9 @@
 	                  	<ul>
 	                  		<li class="h5 mb-4">Temperature : <b><a id="temproom2">-</a></b></li>
 	                  		<li class="h5 mb-4">Air quality : <b><a id="gasroom2">-</a></b></li>
-	                  		<li class="h5 mb-4">Light intensity : <b><a id="lightroom2">-</a></b></li>
 	                  		<li class="h5 mb-1">Window 1 : <b><a id="win1room2">-</a></b></li>
-	                  		<li class="h5 mb-4">Window 2 : <b><a id="win2room2">-</a></b></li>
+	                  		<li class="h5 mb-5">Window 2 : <b><a id="win2room2">-</a></b></li>
+	                  		<li class="h5 mb-1">Light intensity : <b><a id="lightroom2">-</a></b></li>
 	                  		<li class="h5 mb-1">Lamps : <b><a id="lampsroom2">-/-</a> </b></li>
 	                  	</ul>
 	                  </div>
@@ -465,6 +459,12 @@
   
   <!-- Custom scripts -->
   <script src="${pageContext.request.contextPath}/jsp/js/main.js"></script>
+
+  <script>
+	  $(document).ready(function(){
+	      $('[data-toggle="popover"]').popover();   
+	  });
+  </script>
 
 </body>
 </html>

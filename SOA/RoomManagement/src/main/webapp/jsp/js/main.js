@@ -147,12 +147,13 @@ buttonSetLight.onclick = function() {
 window.onload = function(){
 	this.updateData();
 	var intervalID = setInterval(updateTime, 1000);
-	var intervalIData = setInterval(updateData, 3000);
+	var intervalIData = setInterval(updateData, 10000);
 	// var intervalManage = setInterval(manageRooms, 10000);
 	getOutsideTemp();
 	
 }
 
+// https://kimmobrunfeldt.github.io/progressbar.js/
 
 
 

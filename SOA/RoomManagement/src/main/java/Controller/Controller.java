@@ -35,6 +35,18 @@ public class Controller {
 	@Path("manage")
 	@GET
 	public static String manageRooms(){
+		Controller.manageScenario1();
+		return "OK";
+	}
+	
+	public static void manageScenario1(){
+		
+		// Difference of temperature at which we open/close the window
+		float diffTemp = 5;
+		
+		// Minimum air quality after which we default open the window
+		float thresholdAir = 70;
+				
 		// Get the temperature of all room in a list of triplets [url, room label, value]
 		Client client = ClientBuilder.newClient();
 		String jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/temperature/all")
@@ -44,10 +56,22 @@ public class Controller {
 		JsonArray jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
 		ArrayList<ArrayList<String>> allTemp = JsonUtils.getArrayFromJsonArray(jsonArray);
 		
+		// Get the air quality of all rooms
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/gas/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+		
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> allGas = JsonUtils.getArrayFromJsonArray(jsonArray);
+		
+		
 		// Get external temperature
 		float externalTemp = Float.parseFloat(client.target("http://127.0.0.1:8484/RoomManagement/temperature/out")
 				.request(MediaType.APPLICATION_JSON)
 				.get(String.class));
+		
+		
+		
 		
 		// Get windows status
 		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/windows/all")
@@ -57,18 +81,16 @@ public class Controller {
 		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
 		ArrayList<ArrayList<String>> allWindowsStatus = JsonUtils.getArrayFromJsonArray(jsonArray);
 		
-		for (ArrayList<String> l : allWindowsStatus){
+		for (ArrayList<String> l : allWindowsStatus) {
 			l.set(0, l.get(0).substring(l.get(0).length() - 1));
 		}
 		
-		// Difference of temperature at which we open/close the window
-		float diffTemp = 5;
 		
 		for (int i = 0; i < allTemp.size(); i++){
 			float insideTemp = Float.parseFloat(allTemp.get(i).get(2));
 			//if the room is much hotter than the outside close the windows
 			if (insideTemp - externalTemp > diffTemp){
-				for (int j = 0; j < allWindowsStatus.size() ; j ++){
+				for (int j = 0; j <= allWindowsStatus.size() ; j ++){
 					if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
 						Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
 								.path(String.valueOf(i+1)) // Room
@@ -90,10 +112,26 @@ public class Controller {
 					}
 				}
 			}
+			
+			// If air quality below a certain threshold in a room, open the windows anyway
+			for (int k = 0; k < allGas.size(); k++){
+				if(allGas.get(k).get(1).equals(allTemp.get(i).get(1))){
+					if(Float.parseFloat(allGas.get(k).get(2)) < thresholdAir){
+
+						for (int j = 0; j < allWindowsStatus.size() ; j ++){
+							if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
+								Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
+										.path(String.valueOf(i+1)) // Room
+										.path("/" + allWindowsStatus.get(j).get(0)) // ID
+										.path("/1")
+										.request(MediaType.APPLICATION_JSON).post(null); 
+							}
+						}
+					} 
+				}
+			}
 		}
-		return "OK";
 	}
-	
 	
 	@Path("all")
 	@GET
