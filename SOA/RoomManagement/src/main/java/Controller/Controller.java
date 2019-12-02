@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.GregorianCalendar; 
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -207,5 +208,79 @@ public class Controller {
 				.request(MediaType.APPLICATION_JSON)
 				.post(null);
 		return resp;
+	}
+	
+	@Path("scenario2")
+	@GET
+	public static String scenario2(){
+		
+		//Idée : récupérer l'heure et ouvrir/fermer fenêtres, lumières (+ portes si on le fait) 
+		java.util.GregorianCalendar calendar = new GregorianCalendar();
+		int hour = calendar.get(java.util.Calendar.HOUR_OF_DAY);
+		hour = 10; 
+		//int minute = calendar.get(java.util.Calendar.MINUTE);
+		
+		Client client = ClientBuilder.newClient();
+		
+				
+		// Get windows status
+		String jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/windows/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+		
+		JsonArray jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> allWindowsStatus = JsonUtils.getArrayFromJsonArray(jsonArray);
+		
+		for (ArrayList<String> l : allWindowsStatus){
+			l.set(0, l.get(0).substring(l.get(0).length() - 1));
+		}
+		
+		// Get lights status
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/light/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+				
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> allLightsStatus = JsonUtils.getArrayFromJsonArray(jsonArray);
+				
+		for (ArrayList<String> l : allLightsStatus){
+			l.set(0, l.get(0).substring(l.get(0).length() - 1));
+		}
+		
+		
+		//si c'est après 20h et avant 8h on ferme si c'est ouvert. 
+		//Pb :il va checker toute la nuit toutes les fenetres alors qu'une fois qu'il les as fermées ca devrait être ok
+		//Solution : faire un closed = 1 une fois que c'est fermé et le passer à 0 à 8h ?
+		//Ajouter la notion d'heure dans le scénario 1 sinon ca va réouvrir
+		/*boolean closed = false; 
+		if (hour > 8 && closed) closed = false; */
+		
+		if (hour > 20 && hour < 8){
+			for (int j = 0; j < allWindowsStatus.size() ; j ++){
+				ArrayList<String> wds = allWindowsStatus.get(j); 
+				if (wds.get(2).equals("1")){
+					Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
+							.path(String.valueOf(wds.get(1).substring(wds.get(1).length()-1))) // Room
+							.path("/" + allWindowsStatus.get(j).get(0)) // ID
+							.path("/0")
+							.request(MediaType.APPLICATION_JSON).post(null); 
+				}
+			}
+			for (int j = 0; j < allLightsStatus.size() ; j ++){
+				ArrayList<String> light = allWindowsStatus.get(j);
+				if (light.get(2).equals("1")){
+					Response resp = client.target("http://127.0.0.1:8484/RoomManagement/light/setState/")
+							.path(String.valueOf(light.get(1).substring(light.get(1).length()-1))) // Room
+							.path("/" + allLightsStatus.get(j).get(0)) // ID
+							.path("/0")
+							.request(MediaType.APPLICATION_JSON).post(null); 
+				}
+			}
+		//closed=true; 
+		//}
+		}
+		
+		return "OK";
+	
 	}
 }
