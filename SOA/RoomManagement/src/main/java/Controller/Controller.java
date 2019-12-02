@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.GregorianCalendar; 
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,10 +32,13 @@ import fr.insa.om2m.mapper.Mapper;
 @Path("")
 public class Controller {
 	
+	static Boolean closedForTheNight = false;
+	
 	@Path("manage")
 	@GET
 	public static String manageRooms(){
 		Controller.manageScenario1();
+		Controller.manageScenario2();
 		return "OK";
 	}
 	
@@ -91,7 +93,7 @@ public class Controller {
 			float insideTemp = Float.parseFloat(allTemp.get(i).get(2));
 			//if the room is much hotter than the outside close the windows
 			if (insideTemp - externalTemp > diffTemp){
-				for (int j = 0; j <= allWindowsStatus.size() ; j ++){
+				for (int j = 0; j < allWindowsStatus.size() ; j ++){
 					if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
 						Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
 								.path(String.valueOf(i+1)) // Room
@@ -248,9 +250,9 @@ public class Controller {
 		return resp;
 	}
 	
-	@Path("scenario2")
-	@GET
-	public static String scenario2(){
+	public static void manageScenario2(){
+		double lightThreshold = 0.4;
+		
 		
 		//Idée : récupérer l'heure et ouvrir/fermer fenêtres, lumières (+ portes si on le fait) 
 		java.util.GregorianCalendar calendar = new GregorianCalendar();
@@ -273,18 +275,58 @@ public class Controller {
 			l.set(0, l.get(0).substring(l.get(0).length() - 1));
 		}
 		
-		// Get lights status
+		// Get light sensor status
 		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/light/all")
 				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
 				.get(String.class);
 				
 		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
-		ArrayList<ArrayList<String>> allLightsStatus = JsonUtils.getArrayFromJsonArray(jsonArray);
+		ArrayList<ArrayList<String>> allLights = JsonUtils.getArrayFromJsonArray(jsonArray);
 				
-		for (ArrayList<String> l : allLightsStatus){
+		for (ArrayList<String> l : allLights){
 			l.set(0, l.get(0).substring(l.get(0).length() - 1));
 		}
 		
+		// Get lamp status
+		jsonStr = client.target("http://127.0.0.1:8484/RoomManagement/lamp/all")
+				.request(MediaType.APPLICATION_JSON).header("X-M2M-Origin", "admin:admin")
+				.get(String.class);
+				
+		jsonArray = JsonParser.parseString(jsonStr).getAsJsonArray();
+		ArrayList<ArrayList<String>> allLampsStatus = JsonUtils.getArrayFromJsonArray(jsonArray);
+				
+		for (ArrayList<String> l : allLampsStatus){
+			l.set(0, l.get(0).substring(l.get(0).length() - 1));
+		}
+		
+		for (int i = 0; i < allLights.size(); i++){
+			float lightValue = Float.parseFloat(allLights.get(i).get(2));
+			//if the lighting is high enough, turn off lamps
+			if (lightValue >= lightThreshold){
+				
+				for (int j = 0; j < allLampsStatus.size() ; j ++){
+					if (allLampsStatus.get(j).get(1).equals(allLights.get(i).get(1))){
+						Response resp = client.target("http://127.0.0.1:8484/RoomManagement/lamp/setState/")
+								.path(String.valueOf(i+1)) // Room
+								.path("/" + allLampsStatus.get(j).get(0)) // ID
+								.path("/0")
+								.request(MediaType.APPLICATION_JSON).post(null); 
+					}
+				}
+			}
+			//if the lighting is not high enough, turn on lamps
+			else if (lightValue < lightThreshold){
+				for (int j = 0; j < allLampsStatus.size() ; j ++){
+					if (allLampsStatus.get(j).get(1).equals(allLights.get(i).get(1))){
+						Response resp = client.target("http://127.0.0.1:8484/RoomManagement/lamp/setState/")
+								.path(String.valueOf(i+1)) // Room
+								.path("/" + allLampsStatus.get(j).get(0)) // ID
+								.path("/1")
+								.request(MediaType.APPLICATION_JSON).post(null); 
+					}
+				}
+			}
+		}
 		
 		//si c'est après 20h et avant 8h on ferme si c'est ouvert. 
 		//Pb :il va checker toute la nuit toutes les fenetres alors qu'une fois qu'il les as fermées ca devrait être ok
@@ -293,7 +335,9 @@ public class Controller {
 		/*boolean closed = false; 
 		if (hour > 8 && closed) closed = false; */
 		
-		if (hour > 20 && hour < 8){
+		
+		
+		if (hour > 20 || hour < 8){
 			for (int j = 0; j < allWindowsStatus.size() ; j ++){
 				ArrayList<String> wds = allWindowsStatus.get(j); 
 				if (wds.get(2).equals("1")){
@@ -304,21 +348,17 @@ public class Controller {
 							.request(MediaType.APPLICATION_JSON).post(null); 
 				}
 			}
-			for (int j = 0; j < allLightsStatus.size() ; j ++){
-				ArrayList<String> light = allWindowsStatus.get(j);
-				if (light.get(2).equals("1")){
-					Response resp = client.target("http://127.0.0.1:8484/RoomManagement/light/setState/")
-							.path(String.valueOf(light.get(1).substring(light.get(1).length()-1))) // Room
-							.path("/" + allLightsStatus.get(j).get(0)) // ID
+			for (int j = 0; j < allLampsStatus.size() ; j ++){
+				ArrayList<String> lamp = allLampsStatus.get(j);
+				if (lamp.get(2).equals("1")){
+					Response resp = client.target("http://127.0.0.1:8484/RoomManagement/lamp/setState/")
+							.path(String.valueOf(lamp.get(1).substring(lamp.get(1).length()-1))) // Room
+							.path("/" + allLampsStatus.get(j).get(0)) // ID
 							.path("/0")
 							.request(MediaType.APPLICATION_JSON).post(null); 
 				}
 			}
-		//closed=true; 
-		//}
+			closedForTheNight=true;
 		}
-		
-		return "OK";
-	
 	}
 }
