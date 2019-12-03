@@ -61,7 +61,7 @@
 
       <!-- Nav Item - Window -->
       <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="popover" title="Second scenario" data-content="lorem ipsum dokeodkeokdm smodk eri oismoi">
+        <a class="nav-link" href="#" data-toggle="popover" title="Second scenario" data-content="If the light sensor value drops below 0.4 in a room, turn on all the lights of the room. If it's above this value, turn them on. After 8PM and before 8AM, close every window and turn off every lamp.">
           <i class="fas fa-fw fa-table"></i>
           <span>Scenario 2</span></a>
       </li>
@@ -142,7 +142,7 @@
                   <h2>Test</h2>
               </li>
     
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <!-- Nav Item - Searfh Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h2>Test</h2>
@@ -312,13 +312,13 @@
                   <div class="progress mb-4">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">MN-CSE Room 2<span class="float-right">KO</span></h4>
+                  <h4 class="small font-weight-bold">MN-CSE Room 2<span class="float-right">OK</span></h4>
                   <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 10%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">OpenWeatherMap<span class="float-right">ISSUES</span></h4>
+                  <h4 class="small font-weight-bold">OpenWeatherMap<span class="float-right">OK</span></h4>
                   <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                   <h4 class="small font-weight-bold">WorldTime&Date<span class="float-right">OK</span></h4>
                   <div class="progress">

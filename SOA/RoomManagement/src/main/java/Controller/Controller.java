@@ -88,18 +88,49 @@ public class Controller {
 			l.set(0, l.get(0).substring(l.get(0).length() - 1));
 		}
 		
+		ArrayList<String> roomToIgnore = new ArrayList<String>();
 		
 		for (int i = 0; i < allTemp.size(); i++){
 			float insideTemp = Float.parseFloat(allTemp.get(i).get(2));
 			//if the room is much hotter than the outside close the windows
+			
+			// If air quality below a certain threshold in a room, open the windows anyway
+			for (int k = 0; k < allGas.size(); k++){
+				if(allGas.get(k).get(1).equals(allTemp.get(i).get(1))){
+					if(Float.parseFloat(allGas.get(k).get(2)) < thresholdAir){
+
+						for (int j = 0; j < allWindowsStatus.size() ; j ++){
+							if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
+								roomToIgnore.add(allWindowsStatus.get(j).get(1));
+								Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
+										.path(String.valueOf(i+1)) // Room
+										.path("/" + allWindowsStatus.get(j).get(0)) // ID
+										.path("/1")
+										.request(MediaType.APPLICATION_JSON).post(null); 
+							}
+						}
+					} 
+				}
+			}
+			
+			
 			if (insideTemp - externalTemp > diffTemp){
 				for (int j = 0; j < allWindowsStatus.size() ; j ++){
 					if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
-						Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
-								.path(String.valueOf(i+1)) // Room
-								.path("/" + allWindowsStatus.get(j).get(0)) // ID
-								.path("/0")
-								.request(MediaType.APPLICATION_JSON).post(null); 
+						Boolean roomOk = true;
+						for(int l = 0;l < roomToIgnore.size(); l++){
+							if(allWindowsStatus.get(j).get(1).equals(roomToIgnore.get(l))){
+								roomOk = false;
+							}
+						}
+						if(roomOk){
+							Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
+									.path(String.valueOf(i+1)) // Room
+									.path("/" + allWindowsStatus.get(j).get(0)) // ID
+									.path("/0")
+									.request(MediaType.APPLICATION_JSON).post(null); 
+						}
+						
 					}
 				}
 			}
@@ -113,24 +144,6 @@ public class Controller {
 								.path("/1")
 								.request(MediaType.APPLICATION_JSON).post(null); 
 					}
-				}
-			}
-			
-			// If air quality below a certain threshold in a room, open the windows anyway
-			for (int k = 0; k < allGas.size(); k++){
-				if(allGas.get(k).get(1).equals(allTemp.get(i).get(1))){
-					if(Float.parseFloat(allGas.get(k).get(2)) < thresholdAir){
-
-						for (int j = 0; j < allWindowsStatus.size() ; j ++){
-							if (allWindowsStatus.get(j).get(1).equals(allTemp.get(i).get(1))){
-								Response resp = client.target("http://127.0.0.1:8484/RoomManagement/windows/setState/")
-										.path(String.valueOf(i+1)) // Room
-										.path("/" + allWindowsStatus.get(j).get(0)) // ID
-										.path("/1")
-										.request(MediaType.APPLICATION_JSON).post(null); 
-							}
-						}
-					} 
 				}
 			}
 		}

@@ -150,6 +150,7 @@ window.onload = function(){
 	var intervalIData = setInterval(updateData, 10000);
 	// var intervalManage = setInterval(manageRooms, 10000);
 	getOutsideTemp();
+	var intervalOutsideTemp = setInterval(getOutsideTemp, 60000);
 	
 }
 
